@@ -1,20 +1,7 @@
 <div align="center">
-    <h1>Example</h1>
+    <h1>Anonymous</h1>
     <img src="https://img.shields.io/badge/category-pwn-00aaff" /> <img src="https://img.shields.io/badge/points-%3F-eaeaea" />
 </div>
-
----
-
-```txt
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce posuere, libero convallis aliquet luctus, libero odio tincidunt mi, eget dignissim nisi ante id turpis. Donec hendrerit vel libero et placerat. Donec vitae purus mi. Mauris placerat ornare tristique. Duis lobortis est nisi, eget pulvinar mauris pharetra sit amet. Suspendisse pulvinar, nibh nec semper posuere, massa urna malesuada ligula, et egestas purus nisl semper dui. 
-Phasellus magna nisl, pretium eget odio dictum, posuere euismod tortor. In eleifend nisi et neque mattis molestie. Donec a ultrices mi, at molestie orci. Fusce ex nisl, pellentesque in lectus vitae, bibendum fermentum elit. Duis convallis tempor diam vitae aliquet. Ut cursus nisi est, ac volutpat felis malesuada ac. Nulla facilisi. Nulla luctus quis orci vel luctus. Etiam nec dui eget neque pellentesque vestibulum. Sed dapibus ultricies scelerisque.
-
-Hints:
-- solve the challenge
-- create a nice writeup
-```
-
----
 
 ## Table of Contents
 
