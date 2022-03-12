@@ -143,7 +143,7 @@ else
 fi
 ```
 
-This look like a CRON job, lets dive more in seeing what we can do with this. Maybe convert it to something malicious thatwe can get it to execute. Lets also look at the .log file
+This look like a CRON job, lets dive more in seeing what we can do with this. Maybe convert it to something malicious that we can execute. Lets also look at the .log file
 
 ```console
 cat removed_files.log 
