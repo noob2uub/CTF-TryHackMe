@@ -4,10 +4,10 @@ This is my write-up for the room [Basic Pentesting] (https://tryhackme.com/room/
 
 Description: Try to get the two flags!  Root the machine and prove your understanding of the fundamentals! This is a virtual machine meant for beginners. Acquiring both flags will require some basic knowledge of Linux and privilege escalation methods.
  
-
+```
 Try Hackme Difficulty: Medium
 My Difficulty: Easy
-
+```
 
 <p align="center">
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Anonymous_emblem.svg/1024px-Anonymous_emblem.svg.png" style="width:25%;">
