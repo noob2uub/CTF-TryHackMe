@@ -180,11 +180,11 @@ msf5 auxiliary(scanner/http/dir_scanner) > run
 [*] Scanned 1 of 1 hosts (100% complete)
 [*] Auxiliary module execution completed
 ```
-This is  where I found the /manager directory
+I was able to find the /manager directory and navigating to the page shows this 
 
 ![Screenshot_2022-03-18_13-34-15](https://user-images.githubusercontent.com/68706090/159079475-e42db75c-50ce-4c75-a692-d55be214ead1.png)
 
-Scrolling through this, there are probably many ways to get but the box calls to use metasploit so lets dive in. 
+Scrolling through the page, there are probably many ways to get but the box calls to use metasploit so lets dive in. 
 ```console
 msf5 > search tomcat
 
@@ -218,7 +218,7 @@ Matching Modules
    22  post/windows/gather/enum_tomcat                                               normal     No     Windows Gather Apache Tomcat Enumeration
 ```
 
-Looking at this number 15 stands out to me being a Tomcat RCE. so lets try that. After looking at this exploit it doesn't seem to work, yes I am posting my trial and error :) Ignor the next line, because it did not work, but I am posting my attempts.
+Looking at this number 15 stands out to me being a Tomcat RCE. so lets try that. After looking at this exploit it doesn't seem to work, yes I am posting my trial and error :) Ignore the next line, because it did not work, but I am posting my attempts.
 
 ```console
 msf5 exploit(multi/http/tomcat_jsp_upload_bypass) > set RHOST 10.10.160.183
@@ -419,14 +419,10 @@ root@ip-10-10-160-183:~#
 ```
 I don't use metasploit that often and instantly went for a whoami, then remembered it doesn't work. So I used the shell command to go into the boxes native shell and stabilized the shell with python. 
 
-from there it was just navigating to the flag. 
+From there it was just navigating to the flag. 
 
 Unfortunelty I am still missing one task and the answer was not in the Nikto scan, so lets continue looking and see about just scanning /manage/html from what we found on the first Nikto Scan, maybe I will go watch a TV show and come back, because this takes forever. 
 
-.
-.
-.
-.
 AFTER BEATING MY HEAD, if realized i did not format the host properly in Nikto. I was not putting the HTTP in so it was not authenticating during the scan.... 
 
 ```console 
