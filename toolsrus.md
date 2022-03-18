@@ -444,13 +444,7 @@ nikto -h http://10.10.241.55:1234/manager/html -id bob:bubbles
 + Allowed HTTP Methods: GET, HEAD, POST, PUT, DELETE, OPTIONS 
 + OSVDB-397: HTTP method ('Allow' Header): 'PUT' method could allow clients to save files on the web server.
 + OSVDB-5646: HTTP method ('Allow' Header): 'DELETE' may allow clients to remove files on the web server.
-.
-427
-.
-428
-.
-429
-.+ /manager/html/cgi.cgi/blog/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/cgi.cgi/blog/mt.cfg: Movable Type configuration file found. Should not be available remotely.
 + /manager/html/webcgi/blog/mt.cfg: Movable Type configuration file found. Should not be available remotely.
 + /manager/html/cgi-914/blog/mt.cfg: Movable Type configuration file found. Should not be available remotely.
 + /manager/html/cgi-915/blog/mt.cfg: Movable Type configuration file found. Should not be available remotely.
