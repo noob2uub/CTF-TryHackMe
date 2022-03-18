@@ -278,7 +278,7 @@ msf5 exploit(multi/http/tomcat_jsp_upload_bypass) > exploit
 [-] Exploit aborted due to failure: unexpected-reply: Failed to upload the payload
 [*] Exploit completed, but no session was created.
 ```
-after looking at things more and we are in the manager part of Tomcat lets look at exploit/multi/http/tomcat_mgr_upload, we already have user credentials so I do not see a reason for *deploy. Fingers crossed. 
+After looking at things more and we are in the manager part of Tomcat lets look at exploit/multi/http/tomcat_mgr_upload, we already have user credentials so I do not see a reason for *deploy. Fingers crossed. 
 
 ```console
 exploit(multi/http/tomcat_mgr_upload) > show info
@@ -421,5 +421,14 @@ I don't use metasploit that often and instantly went for a whoami, then remember
 
 from there it was just navigating to the flag. 
 
+Unfortunelty I am still missing one task and the answer was not in the Nikto scan, so lets continue looking and see about just scanning /manage/html from what we found on the first Nikto Scan, maybe I will go watch a TV show and come back, because this takes forever. 
+
+.
+.
+.
+.
+AFTER BEATING MY HEAD, if realized i did not format the host properly in Nikto. I was not putting the HTTP in so it was not authenticating during the scan.... 
+
+```console 
 
 
