@@ -1,6 +1,6 @@
 # Anonymous
 
-This is my write-up for the room [Basic Pentesting] (https://tryhackme.com/room/anonymous)
+This is my write-up for the room [anonymous]Basic Pentesting] (https://tryhackme.com/room/anonymous)
 
 Description: Try to get the two flags!  Root the machine and prove your understanding of the fundamentals! This is a virtual machine meant for beginners. Acquiring both flags will require some basic knowledge of Linux and privilege escalation methods.
 
