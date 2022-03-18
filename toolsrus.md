@@ -159,7 +159,7 @@ While this scan is running we can answer more of the questions based on the NMAP
 
 I got tired of waiting for Nikto to give me the answer to I decided to use metasploit to search port 1234 while I was in it. 
 
-~~~console
+```console
 msf5 > use auxilary scanner
 [-] No results from search
 [-] Failed to load module: auxilary
@@ -185,7 +185,6 @@ This is  where I found the /manager directory
 ![Screenshot_2022-03-18_13-34-15](https://user-images.githubusercontent.com/68706090/159079475-e42db75c-50ce-4c75-a692-d55be214ead1.png)
 
 Scrolling through this, there are probably many ways to get but the box calls to use metasploit so lets dive in. 
-
 ```console
 msf5 > search tomcat
 
