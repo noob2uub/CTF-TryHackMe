@@ -113,5 +113,5 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
 ===============================================================
 ```
 
-Navigating to http://10.10.135.157/guidelines/ shows us this. We have a user name and confirming TomCat server thats runing on port 1234. 
-<center>![Screenshot_2022-03-18_11-41-18](https://user-images.githubusercontent.com/68706090/159064424-42c10906-6b0b-49e9-95e0-7fcd8690afb4.png)</center>
+Navigating to http://10.10.135.157/guidelines/ shows us this. We have a user name and confirming TomCat server thats runing on port 1234
+![Screenshot_2022-03-18_11-41-18](https://user-images.githubusercontent.com/68706090/159064424-42c10906-6b0b-49e9-95e0-7fcd8690afb4.png)
