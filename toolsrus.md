@@ -65,7 +65,7 @@ Next lets run a dir buster (wasn't getting results, so I had to reset the box wi
 
 ## Gobuster
 ```console
-gobuster dir -u http://10.10.160.183 -w /home/noob2uub/Documents/Wordlists/2.3-small.txt
+gobuster dir -u http://10.10.160.183 -w /home/noob2uub/uments/Wordlists/2.3-small.txt
 ===============================================================
 Gobuster v3.1.0
 by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
@@ -425,6 +425,119 @@ Unfortunelty I am still missing one task and the answer was not in the Nikto sca
 
 AFTER BEATING MY HEAD, if realized i did not format the host properly in Nikto. I was not putting the HTTP in so it was not authenticating during the scan.... 
 
+There  full scan even though I got root and not the nikto flag I have it now after playing a few video games and eating a meal its finally complete.
 ```console 
-
+nikto -h http://10.10.241.55:1234/manager/html -id bob:bubbles
+- Nikto v2.1.6
+---------------------------------------------------------------------------
++ Target IP:          10.10.241.55
++ Target Hostname:    10.10.241.55
++ Target Port:        1234
++ Start Time:         2022-03-18 14:25:52 (GMT-7)
+---------------------------------------------------------------------------
++ Server: Apache-Coyote/1.1
++ The anti-clickjacking X-Frame-Options header is not present.
++ The X-XSS-Protection header is not defined. This header can hint to the user agent to protect against some forms of XSS
++ The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site in a different fashion to the MIME type
++ Successfully authenticated to realm 'Tomcat Manager Application' with user-supplied credentials.
++ All CGI directories 'found', use '-C none' to test none
++ Allowed HTTP Methods: GET, HEAD, POST, PUT, DELETE, OPTIONS 
++ OSVDB-397: HTTP method ('Allow' Header): 'PUT' method could allow clients to save files on the web server.
++ OSVDB-5646: HTTP method ('Allow' Header): 'DELETE' may allow clients to remove files on the web server.
+.
+427
+.
+428
+.
+429
+.+ /manager/html/cgi.cgi/blog/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/webcgi/blog/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/cgi-914/blog/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/cgi-915/blog/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/bin/blog/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/cgi/blog/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/mpcgi/blog/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/cgi-bin/blog/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/ows-bin/blog/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/cgi-sys/blog/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/cgi-local/blog/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/htbin/blog/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/cgibin/blog/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/cgis/blog/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/scripts/blog/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/cgi-win/blog/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/fcgi-bin/blog/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/cgi-exe/blog/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/cgi-home/blog/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/cgi-perl/blog/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/scgi-bin/blog/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/cgi-bin-sdb/blog/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/cgi-mod/blog/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/cgi.cgi/mt-static/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/webcgi/mt-static/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/cgi-914/mt-static/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/cgi-915/mt-static/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/bin/mt-static/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/cgi/mt-static/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/mpcgi/mt-static/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/cgi-bin/mt-static/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/ows-bin/mt-static/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/cgi-sys/mt-static/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/cgi-local/mt-static/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/htbin/mt-static/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/cgibin/mt-static/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/cgis/mt-static/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/scripts/mt-static/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/cgi-win/mt-static/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/fcgi-bin/mt-static/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/cgi-exe/mt-static/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/cgi-home/mt-static/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/cgi-perl/mt-static/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/scgi-bin/mt-static/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/cgi-bin-sdb/mt-static/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/cgi-mod/mt-static/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/cgi.cgi/mt/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/webcgi/mt/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/cgi-914/mt/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/cgi-915/mt/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/bin/mt/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/cgi/mt/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/mpcgi/mt/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/cgi-bin/mt/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/ows-bin/mt/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/cgi-sys/mt/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/cgi-local/mt/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/htbin/mt/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/cgibin/mt/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/cgis/mt/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/scripts/mt/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/cgi-win/mt/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/fcgi-bin/mt/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/cgi-exe/mt/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/cgi-home/mt/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/cgi-perl/mt/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/scgi-bin/mt/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/cgi-bin-sdb/mt/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ /manager/html/cgi-mod/mt/mt.cfg: Movable Type configuration file found. Should not be available remotely.
++ OSVDB-3092: /manager/html/localstart.asp: This may be interesting...
++ OSVDB-3233: /manager/html/manager/manager-howto.html: Tomcat documentation found.
++ OSVDB-3233: /manager/html/jk-manager/manager-howto.html: Tomcat documentation found.
++ OSVDB-3233: /manager/html/jk-status/manager-howto.html: Tomcat documentation found.
++ OSVDB-3233: /manager/html/admin/manager-howto.html: Tomcat documentation found.
++ OSVDB-3233: /manager/html/host-manager/manager-howto.html: Tomcat documentation found.
++ /manager/html/manager/html: Default Tomcat Manager / Host Manager interface found
++ /manager/html/jk-manager/html: Default Tomcat Manager / Host Manager interface found
++ /manager/html/jk-status/html: Default Tomcat Manager / Host Manager interface found
++ /manager/html/admin/html: Default Tomcat Manager / Host Manager interface found
++ /manager/html/host-manager/html: Default Tomcat Manager / Host Manager interface found
++ /manager/html/httpd.conf: Apache httpd.conf configuration file
++ /manager/html/httpd.conf.bak: Apache httpd.conf configuration file
++ /manager/html/manager/status: Default Tomcat Server Status interface found
++ /manager/html/jk-manager/status: Default Tomcat Server Status interface found
++ /manager/html/jk-status/status: Default Tomcat Server Status interface found
++ /manager/html/admin/status: Default Tomcat Server Status interface found
++ /manager/html/host-manager/status: Default Tomcat Server Status interface found
++ 26522 requests: 0 error(s) and 94 item(s) reported on remote host
++ End Time:           2022-03-18 15:48:02 (GMT-7) (4930 seconds)
+```
 
