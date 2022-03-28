@@ -58,3 +58,41 @@ Now to further inpect the file we see there is binary in the background. Lets ta
 01000001 00100000 01110000  01101001 01100011 01110100  01110101 01110010 01100101  00100000 01101001 01110011  00100000 01110111 01101111  01110010 01110100 01101000  00100000 00110001 00110000  00110000 00110000 00100000  01110111 01101111 01110010  01100100 01110011 00100000  01100010 01110101 01110100  00100000 01101101 01100101  01110100 01100001 01100100  01100001 01110100 01100001  00100000 01101001 01110011  00100000 01110111 01101111  01110010 01110100 01101000  00100000 01100110 01100001 01110010 00100000 01101101 01101111 01110010 01100101 
 
 "A picture is worth 1000 words but metadata is worth far more"
+
+User Name found in the source code: SakuraSnowAngelAiko
+
+now lets search https://whatsmyname.app/
+
+We see that he is on reddit, github, and datezone, but datezone is tagged as XXX so I personally wont be going there for this box. 
+
+![Screenshot_2022-03-28_13-22-46](https://user-images.githubusercontent.com/68706090/160480665-b01cd59f-5bc1-48dc-9e69-37ff34d49be4.png)
+
+In his github we found a PGP page and a bunch of info about crypto. Lets take a look at the pgp to find out the missing flag. 
+
+I created an .asc file from the PGP file and found his email
+
+# GPG
+
+```console
+noob2uub@kali:~/Documents/tryhackme/Sakura$ gpg --import aiko.asc
+gpg: can't open 'aiko.asc': No such file or directory
+gpg: Total number processed: 0
+noob2uub@kali:~/Documents/tryhackme/Sakura$ ls
+Screenshot_2022-03-28_12-52-43.png  Screenshot_2022-03-28_13-03-46.png  Screenshot_2022-03-28_13-22-46.png
+noob2uub@kali:~/Documents/tryhackme/Sakura$ gpg --import aiko.asc
+gpg: key ECDD0FD294110450: public key "SakuraSnowAngel83@protonmail.com" imported
+gpg: Total number processed: 1
+gpg:               imported: 1
+```
+Then we also find his first name doing a good search
+
+``console
+
+Aiko Abe - Senior Software Engineer - Self-employed | LinkedInhttps://jp.linkedin.com › sakurasnowa...· Translate this page
+日本 · Senior Software Engineer · Self-employed
+Georgia Institute of Technology. Master of Science - MSComputer and Information Systems Security/Information Assurance. 2007年 – 2010年.
+```
+
+
+
+
