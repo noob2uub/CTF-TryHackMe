@@ -190,6 +190,102 @@ Hydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2022-03-28 10:30:
 1 of 1 target successfully completed, 1 valid password found
 Hydra (https://github.com/vanhauser-thc/thc-hydra) finished at 2022-03-28 10:31:25
 ```
+Navigating to the site we notice that there isn't much listed here other then its a CMS Blog on Joomla. The default Adminitrative page for joomla is /administrator and that takes us to a new log in. Other ways you can find the admin page is from running a nikto scan or looking at the robots.txt page.
+
+# Robots.txt
+```console
+# If the Joomla site is installed within a folder 
+# eg www.example.com/joomla/ then the robots.txt file 
+# MUST be moved to the site root 
+# eg www.example.com/robots.txt
+# AND the joomla folder name MUST be prefixed to all of the
+# paths. 
+# eg the Disallow rule for the /administrator/ folder MUST 
+# be changed to read 
+# Disallow: /joomla/administrator/
+#
+# For more information about the robots.txt standard, see:
+# http://www.robotstxt.org/orig.html
+#
+# For syntax checking, see:
+# http://tool.motoricerca.info/robots-checker.phtml
+
+User-agent: *
+Disallow: /administrator/
+Disallow: /bin/
+Disallow: /cache/
+Disallow: /cli/
+Disallow: /components/
+Disallow: /includes/
+Disallow: /installation/
+Disallow: /language/
+Disallow: /layouts/
+Disallow: /libraries/
+Disallow: /logs/
+Disallow: /modules/
+Disallow: /plugins/
+Disallow: /tmp/
+```
+# Nikto
+
+```console
+nikto -host 10.10.150.75 -port 8080 -id joker:hannah
+- Nikto v2.1.6
+---------------------------------------------------------------------------
++ Target IP:          10.10.150.75
++ Target Hostname:    10.10.150.75
++ Target Port:        8080
++ Start Time:         2022-03-28 10:41:18 (GMT-7)
+---------------------------------------------------------------------------
++ Server: Apache/2.4.29 (Ubuntu)
++ The anti-clickjacking X-Frame-Options header is not present.
++ The X-XSS-Protection header is not defined. This header can hint to the user agent to protect against some forms of XSS
++ The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site in a different fashion to the MIME type
++ / - Requires Authentication for realm ' Please enter the password.'
++ Successfully authenticated to realm ' Please enter the password.' with user-supplied credentials.
+
++ Entry '/administrator/' in robots.txt returned a non-forbidden or redirect HTTP code (200)
++ Entry '/bin/' in robots.txt returned a non-forbidden or redirect HTTP code (200)
++ Entry '/cache/' in robots.txt returned a non-forbidden or redirect HTTP code (200)
++ Entry '/cli/' in robots.txt returned a non-forbidden or redirect HTTP code (200)
++ Entry '/components/' in robots.txt returned a non-forbidden or redirect HTTP code (200)
++ Entry '/includes/' in robots.txt returned a non-forbidden or redirect HTTP code (200)
++ Entry '/language/' in robots.txt returned a non-forbidden or redirect HTTP code (200)
++ Entry '/layouts/' in robots.txt returned a non-forbidden or redirect HTTP code (200)
++ Entry '/libraries/' in robots.txt returned a non-forbidden or redirect HTTP code (200)
++ Entry '/modules/' in robots.txt returned a non-forbidden or redirect HTTP code (200)
++ Entry '/plugins/' in robots.txt returned a non-forbidden or redirect HTTP code (200)
++ Entry '/tmp/' in robots.txt returned a non-forbidden or redirect HTTP code (200)
++ "robots.txt" contains 14 entries which should be manually viewed.
++ /backup.zip: Potentially interesting archive/cert file found.
++ /backup.zip: Potentially interesting archive/cert file found. (NOTE: requested by IP address).
+```
+
+However, it is good that I ran the nikto scan just to highlight how to find the additional page because the Joker's credentials did not work for the admin login. 
+
+![Screenshot_2022-03-28_10-46-37](https://user-images.githubusercontent.com/68706090/160459500-7fba67a7-7942-49aa-97c8-7a3a0ac9978d.png)
+
+I did notice that there is a backup.zip file from the nikto scan, so its a good thing that I did not stop it to early. Also its a good thing that the Joker resuses passes works. You could also brute force it with john if you wanted to. 
+
+![Screenshot_2022-03-28_10-49-42](https://user-images.githubusercontent.com/68706090/160459669-ab7527f2-7333-4e43-8e29-6c727ca9e6ae.png)
+
+I see the file is a backup SQL SB file, so I open it in sublime text and earch for and type of admin credentials. 
+
+```console
+LOCK TABLES `cc1gr_users` WRITE;
+/*!40000 ALTER TABLE `cc1gr_users` DISABLE KEYS */;
+INSERT INTO `cc1gr_users` VALUES (547,'Super Duper User','admin','admin@example.com','$2y$10$b43UqoH5UpXokj2y9e/8U.LD8T3jEQCuxG2oHzALoJaj9M5unOcbG',0,1,'2019-10-08 12:00:15','2019-10-25 15:20:02','0','{\"admin_style\":\"\",\"admin_language\":\"\",\"language\":\"\",\"editor\":\"\",\"helpsite\":\"\",\"timezone\":\"\"}','0000-00-00 00:00:00',0,'','',0);
+/*!40000 ALTER TABLE `cc1gr_users` ENABLE KEYS */;
+UNLOCK TABLES;
+```
+
+We have a hash that now we have to start cracking 
+
+Hash = `$2y$10$b43UqoH5UpXokj2y9e/8U.LD8T3jEQCuxG2oHzALoJaj9M5unOcbG'
+
+
+
+
 
 
 
