@@ -309,7 +309,7 @@ I found this page, let see what I can do with it
 
 https://www.hackingarticles.in/joomla-reverse-shell/
 
-Start Netcat listener and then edit the template with the reverse shell provided by pentest monkey. 
+Start Netcat listener and then edit the template with the reverse shell provided by pentest monkey. Then select preview to launch the reverse shell
 
 ![Screenshot_2022-03-28_11-38-24](https://user-images.githubusercontent.com/68706090/160464457-0890f5cd-15dc-48a4-b2d4-6f51ff384127.png)
 
