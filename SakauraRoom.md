@@ -1,8 +1,10 @@
+# Tip-Off
+
 Our first hint is this photo, lets start taking a look at it in more details
 
 ![Screenshot_2022-03-28_12-52-43](https://user-images.githubusercontent.com/68706090/160476067-126b5ae3-49fe-40dc-8e8d-3dd74dc710c7.png)
 
-# Strings
+### Strings
 
 ```console
 noob2uub@kali:~/Documents/tryhackme/Sakura$ strings Screenshot_2022-03-28_12-52-43.png 
@@ -22,7 +24,7 @@ jxJc
 ```
 I didn't post everything but I did not find anything interesting
 
-# Exiftool
+### Exiftool
 
 ```console
 noob2uub@kali:~/Documents/tryhackme/Sakura$ exiftool Screenshot_2022-03-28_12-52-43.png 
@@ -61,6 +63,8 @@ Now to further inpect the file we see there is binary in the background. Lets ta
 
 User Name found in the source code: SakuraSnowAngelAiko
 
+# Reconnaissance
+
 now lets search https://whatsmyname.app/
 
 We see that he is on reddit, github, and datezone, but datezone is tagged as XXX so I personally wont be going there for this box. 
@@ -71,7 +75,7 @@ In his github we found a PGP page and a bunch of info about crypto. Lets take a 
 
 I created an .asc file from the PGP file and found his email
 
-# GPG
+### GPG
 
 ```console
 noob2uub@kali:~/Documents/tryhackme/Sakura$ gpg --import aiko.asc
@@ -92,7 +96,7 @@ Aiko Abe - Senior Software Engineer - Self-employed | LinkedInhttps://jp.linkedi
 日本 · Senior Software Engineer · Self-employed
 Georgia Institute of Technology. Master of Science - MSComputer and Information Systems Security/Information Assurance. 2007年 – 2010年.
 ```
-### Crypto Information
+# Unveil
 
 Looking through his github I found a mining script for Etherium 
 
@@ -106,7 +110,9 @@ Then checking his transaction history of his wallet I go to etherscan.io, and yo
 
 ![Screenshot_2022-03-28_15-40-06](https://user-images.githubusercontent.com/68706090/160498679-8cc80b9c-91f8-4085-a83f-e15a774766e3.png)
 
-# Twitter Account 
+# Taunt
+
+### Twitter Account 
 
 We can see that his Twitter name is Aiko Abe
 
@@ -130,7 +136,7 @@ I decided to check his SSID against Wigle Net and found something
 
 That provided me with the BSSID/MAC information. 
 
-# Home Bound
+### Home Bound
 
 Looking back at the twitter acount we find a picture that was taken prior to him getting on the plane. 
 
