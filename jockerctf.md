@@ -1,5 +1,9 @@
 JokerCTF
-This is my write-up for the room [JokerCTF](https://tryhackme.com/room/jokerctf)
+
+<p align="center">
+<img src="https://tryhackme-images.s3.amazonaws.com/room-icons/ed910d9d7c419b8266128e044a40c7e2.jpeg" style="width:25%;">
+</p>
+This is my write-up for the room [JokerCTF] (https://tryhackme.com/room/jokerctf)
 
 Description: We have developed this lab for the purpose of online penetration practices. Solving this lab is not that tough if you have proper basic knowledge of Penetration testing. Let’s start and learn how to breach it.
 
@@ -18,9 +22,10 @@ Privilege Escalation
 - Get root taking advantage of flaws in LXD
 
 Difficulty
-My Difficulty:
+My Difficulty: Medium (I had no experience with LXD)
 
 Try Hackme Difficulty: Medium
+
 
 
 
